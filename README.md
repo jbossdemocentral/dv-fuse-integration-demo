@@ -1,3 +1,5 @@
+THIS DEMO IS CURRENTLY BEING BUILT
+
 JBoss DV and Fuse (Camel) Integration Demo
 ======================================
 This is a demo project to get you started with automatically installing two EAP instances, one with JBoss 
