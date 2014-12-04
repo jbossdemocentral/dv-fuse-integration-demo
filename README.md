@@ -34,10 +34,10 @@ Follow the instructions on the screen to start JBoss BRMS server and JBoss DV se
 
 
    ```
-UC1: JDBC
-UC2: SQL
-UC3: Olingo
-UC4: REST for OData
+UC1: JDBC  
+UC2: SQL  
+UC3: Olingo  
+UC4: REST for OData  
 
 Use Cases 1 
 ------------  
