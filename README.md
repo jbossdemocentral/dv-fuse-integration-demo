@@ -10,7 +10,7 @@ Quickstart
 
 1. [Download and unzip.](https://github.com/DataVirtualizationByExample/dv-fuse-integration-demo/archive/master.zip)
 
-2. Add DV and Fuse products to software directory.
+2. Add DV Product to software directory.
 
 3. Run 'run.sh'
 
@@ -22,9 +22,6 @@ Follow the instructions on the screen to start JBoss BRMS server and JBoss DV se
                                                                                        
      $ ./target/jboss-eap-6.1.dv/bin/standalone.sh   
    
-   In a terminal window start the JBoss Fuse server:                                         
-                                                                                       
-     $ 
                                                                                                                                                                          
    View the Use Case Project                                                                     
                                                                                        
