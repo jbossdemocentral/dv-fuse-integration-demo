@@ -1,12 +1,12 @@
-THIS DEMO IS CURRENTLY BEING BUILT WITH Customer/Loyalty Context VDB
-INITIAL TO DO:
--Finish Fuse project with use cases
-BIll-UC1 and UC2
-Cojan-UC3 and UC4
-Kenny-
--Add to script install Fuse
--Add to script deploy project
--Add tp script to kickoff deployment test
+THIS DEMO IS CURRENTLY BEING BUILT WITH Customer/Loyalty Context VDB  
+INITIAL TO DO:  
+-Finish Fuse project with use cases  
+BIll-UC1 and UC2  
+Cojan-UC3 and UC4  
+Kenny-  
+-Add to script install Fuse  
+-Add to script deploy project  
+-Add tp script to kickoff deployment test  
 
 JBoss DV and Fuse (Camel) Integration Demo
 ======================================
