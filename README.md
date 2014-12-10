@@ -10,7 +10,7 @@ Quickstart
 
 1. [Download and unzip.](https://github.com/DataVirtualizationByExample/dv-fuse-integration-demo/archive/master.zip)
 
-2. Add DV and Fuse products to installs directory.
+2. Add DV and Fuse products to software directory.
 
 3. Run 'run.sh'
 
