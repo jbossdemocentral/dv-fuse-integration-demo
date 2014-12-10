@@ -64,21 +64,21 @@ echo
 echo
 echo "  - install teiid security files..."
 echo
-cp $DV_SUPPORT_DIR/teiidfiles/teiid* $SERVER_CONF_DV
+cp $DV_SUPPORT_DIR/teiid* $SERVER_CONF_DV
 
 echo
 echo "  - move data files..."
 echo
-cp -R $DV_SUPPORT_DIR/teiidfiles/data/* $JBOSS_HOME_DV/standalone/data
+cp -R $DV_SUPPORT_DIR/data/* $JBOSS_HOME_DV/standalone/data
 
 echo
 echo "  - move virtual database..."
 echo
-cp -R $DV_SUPPORT_DIR/teiidfiles/vdb $JBOSS_HOME_DV/standalone/deployments
+cp -R $DV_SUPPORT_DIR/vdb $JBOSS_HOME_DV/standalone/deployments
 
 echo "  - setting up dv standalone.xml configuration adjustments..."
 echo
-cp $DV_SUPPORT_DIR/teiidfiles/standalone.dv.xml $SERVER_CONF_DV/standalone.xml
+cp $DV_SUPPORT_DIR/standalone.dv.xml $SERVER_CONF_DV/standalone.xml
 
 # Final instructions to user to start and run demo.                                                                                     ="
 echo "$DEMO Setup Complete."
