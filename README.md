@@ -10,9 +10,9 @@ Quickstart
 
 1. [Download and unzip.](https://github.com/DataVirtualizationByExample/dv-fuse-integration-demo/archive/master.zip)
 
-2. Add products to installs directory.
+2. Add DV and Fuse products to installs directory.
 
-3. Run 'init.sh' or 'init.bat'.
+3. Run 'run.sh'
 
 Follow the instructions on the screen to start JBoss BRMS server and JBoss DV server.
 
@@ -20,13 +20,15 @@ Follow the instructions on the screen to start JBoss BRMS server and JBoss DV se
                                                                                        
    In a terminal window start the JBoss DV server:                                         
                                                                                        
-     $ ./target/jboss-eap-6.1.dv/bin/standalone.sh                                     
-                                                                                                                                                                         
-   View the Virtual Database Project:                                                                     
+     $ ./target/jboss-eap-6.1.dv/bin/standalone.sh   
+   
+   In a terminal window start the JBoss Fuse server:                                         
                                                                                        
-       Import the DV project into JBDS with the Teiid tools installed.  
-       See the How to guide for more detail.  
-       The Virtual Database and data is installed during the init.sh script.                                                       
+     $ 
+                                                                                                                                                                         
+   View the Use Case Project                                                                     
+                                                                                       
+       mvn test ....                                                   
 
    Login to 
       DV JBoss Management: http://localhost:8080         (u:admin / p:redhat1!)  
@@ -34,21 +36,35 @@ Follow the instructions on the screen to start JBoss BRMS server and JBoss DV se
 
 
    ```
-UC1: JDBC  
-UC2: SQL  
-UC3: Olingo  
-UC4: REST for OData  
 
 Use Cases 1 
 ------------  
 **Objective**   
+Use the JDBC component to access a virtual database  
+**Problem**   
+**Solution**   
+**Description:**  
+Use Cases 2 
+------------  
+**Objective**   
+Use the SQL component to access a virtual database  
+**Problem**   
+**Solution**   
+**Description:**  
+Use Cases 3 
+------------  
+**Objective**   
 Use the Olingo component to access a virtual database  
 **Problem**   
-   
 **Solution**   
-Use the Olingo camel component   
 **Description:**  
-
+Use Cases 4 
+------------  
+**Objective**   
+Use the REST component to access a virtual database  
+**Problem**   
+**Solution**   
+**Description:**  
 
 Coming soon:
 ------------
@@ -58,15 +74,11 @@ Coming soon:
 
 Supporting Articles
 -------------------
-How to guide for more detail on install to run the demo and to recreate from scratch in process with 3 videos - Part 1 Setup/Configuration, Part 2 Build/deploy, Part 3 Run.  
-DV - Example of two federating two datasources - https://developer.jboss.org/docs/DOC-18404  
-BRMS - A basic BRMS quickstart - http://www.jboss.org/quickstarts/brms/helloworld-brms/  
+N/A  
 
 Released versions
 -----------------
 
 See the tagged releases for the following versions of the product:
 
-- v1.1 - setup initial demo project for using multiple camel components.
-
-- v1.0 - Kenny Peeples initial setup for webinar on this topic in September 2014.
+- v1.0 - Kenny Peeples initial setup
