@@ -28,7 +28,7 @@ Follow the instructions on the screen to start JBoss BRMS server and JBoss DV se
                                                                                        
    In a terminal window start the JBoss DV server:                                         
                                                                                        
-     $ ./target/jboss-eap-6.1.dv/bin/standalone.sh   
+     $ ./target/dv/jboss-eap-6.1/bin/standalone.sh   
    
                                                                                                                                                                          
    View the Use Case Project                                                                     

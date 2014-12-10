@@ -4,7 +4,7 @@ AUTHORS="Kenny Peeples, Bill Kemp, Cojan"
 PROJECT="git@github.com:kpeeples/dv-brms-integration-demo.git"
 PRODUCT="JBoss BRMS & JBoss DV Integration Demo"
 JBOSS_HOME=./target/jboss-eap-6.1
-JBOSS_HOME_DV=./target/jboss-eap-6.1.dv
+JBOSS_HOME_DV=./target/dv/jboss-eap-6.1
 SERVER_DIR=$JBOSS_HOME/standalone/deployments/
 SERVER_CONF=$JBOSS_HOME/standalone/configuration/
 SERVER_BIN=$JBOSS_HOME/bin
@@ -56,7 +56,6 @@ echo Product installer running now...
 echo
 
 java -jar $SRC_DIR/$DV $DV_SUPPORT_DIR/InstallationScript.xml 
-mv $JBOSS_HOME $JBOSS_HOME_DV
 
 read -p "Post DV install configuration <hit return or wait 5 seconds>" -t 5
 echo
