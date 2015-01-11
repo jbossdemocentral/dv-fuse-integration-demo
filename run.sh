@@ -167,7 +167,7 @@ echo "=    - connect to root container with login presented by console  (u:admin
 echo "=    - edit dvfusedemo profile to include the Teiid JDBC driver                           ="
 echo "=      or use the following command in the bin/admin shell                                ="
 echo "=          profile-edit                                                                   ="
-echo "=                --bundles wrap:file:///teiid-8.4.1-redhat-7-jdbc.jar                     ="
+echo "=                --bundles wrap:file:///$PATH/teiid-8.4.1-redhat-7-jdbc.jar               ="
 echo "=                dvfusedemo 1.0                                                           ="
 echo "=                                                                                         ="
 echo "=    - create container name c1 and add dvfusedemo and jboss-fuse-minimal profile         ="
