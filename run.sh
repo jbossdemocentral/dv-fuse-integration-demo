@@ -127,6 +127,12 @@ echo "  - enabling demo accounts logins in users.properties file..."
 echo
 cp $FUSE_SUPPORT_DIR/users.properties $SERVER_CONF_FUSE
 
+echo "  - enabling useCase 3 properties file..."
+echo
+cp $FUSE_SUPPORT_DIR/com.demo.usecase3.odata.cfg $SERVER_CONF_FUSE
+
+
+
 # Final instructions to user to start and run demo.                                                                  
 echo
 echo "==========================================================================================="
@@ -151,17 +157,25 @@ echo "=        $SERVER_BIN_FUSE/fuse                                    ="
 echo "=                                                                                         ="
 echo "=    - start up fabric in fuse console: fabric:create --wait-for-provisioning             ="
 echo "=                                                                                         ="
-echo "=    - run 'mvn fabric8:deploy' from projects/brms-fuse-integration/simpleRoute           ="
+echo "=    - run 'mvn fabric8:deploy' from projects/usecase1                                    ="
 echo "=                                                                                         ="
 echo "=    - login to Fuse management console at:                                               ="
 echo "=                                                                                         ="
 echo "=        http://localhost:8181    (u:admin/p:admin)                                       ="
 echo "=                                                                                         ="
 echo "=    - connect to root container with login presented by console  (u:admin/p:admin)       ="
+echo "=    - edit dvfusedemo profile to include the Teiid JDBC driver                           ="
+echo "=      or use the following command in the bin/admin shell                                ="
+echo "=          profile-edit                                                                   ="
+echo "=                --bundles wrap:file:///teiid-8.4.1-redhat-7-jdbc.jar                     ="
+echo "=                dvfusedemo 1.0                                                           ="
 echo "=                                                                                         ="
-echo "=    - create container name c1 and add BPMSuiteFuse profile (see readme for screenshot)  ="
+echo "=    - create container name c1 and add dvfusedemo and jboss-fuse-minimal profile         ="
+echo "=      or use the following command in the bin/admin shell                                ="
+echo "=          fabric:container-create-child --profile dvfusedemo                             ="
+echo "=                                        --profile jboss-fuse-minimal root c1             ="
 echo "=                                                                                         ="
-echo "=    - open c1 container to view route under 'DIAGRAM' tab                                ="
+echo "=    - open c1 container to view route under 'Diagram' tab                                ="
 echo "=                                                                                         ="                   
 echo "=                                                                                         ="
 echo "=   $DEMO Setup Complete.                     ="
