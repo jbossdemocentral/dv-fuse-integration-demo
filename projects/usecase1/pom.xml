@@ -16,7 +16,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <fabric8.parentProfiles>feature-camel</fabric8.parentProfiles>
     <fabric8.bundles>mvn:commons-dbcp/commons-dbcp/1.4</fabric8.bundles>    
-    <fabric8.profile>dvfusedemo</fabric8.profile>
+    <fabric8.profile>usecase1</fabric8.profile>
     <fabric8.features>camel-jdbc</fabric8.features>
     <fabric8.featureRepos>mvn:org.apache.camel.karaf/apache-camel/${version:camel}/xml/features</fabric8.featureRepos>
   </properties>
@@ -27,6 +27,7 @@
       <name>FuseSource Release Repository</name>
       <url>http://repo.fusesource.com/nexus/content/repositories/releases</url>
       <snapshots>
+
         <enabled>false</enabled>
       </snapshots>
       <releases>
