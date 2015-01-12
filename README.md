@@ -1,17 +1,8 @@
 THIS DEMO IS CURRENTLY BEING BUILT WITH Customer/Loyalty Context VDB  
-INITIAL TO DO:  
--Finish Fuse project with use cases  
-BIll-UC1 and UC2  
-Cojan-UC3 and UC4  
-Kenny-  
--Add to script install Fuse  
--Add to script deploy project  
--Add tp script to kickoff deployment test  
 
 JBoss DV and Fuse (Camel) Integration Demo
 ======================================
-This is a demo project to get you started with automatically installing two EAP instances, one with JBoss 
-DV product and the other with JBoss Fuse product configured and installed.
+This is a demo project to get you started with automatically installing two EAP instances, one with JBoss Data Virtualization  product and the other with JBoss Fuse product configured and installed.
 
 Quickstart
 ----------
@@ -42,29 +33,29 @@ Follow the instructions on the screen to start JBoss BRMS server and JBoss DV se
 
    ```
 
-Use Cases 1 
-------------  
+Use case 1 
+----------  
 **Objective**   
 Use the JDBC component to access a virtual database  
 **Problem**   
 **Solution**   
 **Description:**  
-Use Cases 2 
-------------  
+Use case 2 
+----------  
 **Objective**   
 Use the SQL component to access a virtual database  
 **Problem**   
 **Solution**   
 **Description:**  
-Use Cases 3 
-------------  
+Use case 3 
+----------  
 **Objective**   
 Use the Olingo component to access a virtual database  
 **Problem**   
 **Solution**   
 **Description:**  
-Use Cases 4 
-------------  
+Use case 4 
+----------  
 **Objective**   
 Use the REST component to access a virtual database  
 **Problem**   
