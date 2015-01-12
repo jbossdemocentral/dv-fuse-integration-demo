@@ -15,12 +15,12 @@ Login to Fuse management console at:
 
 with username admin and password admin
 
-Connect to root container with login presented by console and edit usecase1 fabric profile to include the Teiid JDBC driver or use the following command in the bin/admin shell
+Connect to root container with login presented by console and edit usecase2 fabric profile to include the Teiid JDBC driver or use the following command in the bin/admin shell
 
-    profile-edit --bundles wrap:file:///$PATH/teiid-8.4.1-redhat-7-jdbc.jar iusecase1 1.0  
+    profile-edit --bundles wrap:file:///$PATH/teiid-8.4.1-redhat-7-jdbc.jar usecase2 1.0  
 
-Create container name c1 and add usecase1 and jboss-fuse-minimal profile or use the following command in the bin/admin shell
+Create container name c1 and add usecase2 and jboss-fuse-minimal profile or use the following command in the bin/admin shell
 
-    fabric:container-create-child --profile usecase1 --profile jboss-fuse-minimal root c1
+    fabric:container-create-child --profile usecase2 --profile jboss-fuse-minimal root c1
 
 Open c1 container to view route under 'Diagram' tab
