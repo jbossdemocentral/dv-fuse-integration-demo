@@ -22,7 +22,7 @@ Quickstart
   
    ```  
   You can now start the JBoss Data Virtualization with:  
-      ./target/jboss-eap-6.1/bin/standalone.sh  
+      ./target/dv/jboss-eap-6.1/bin/standalone.sh  
   
       - login JBoss Data Virtualization at:  
   
@@ -46,27 +46,27 @@ Quickstart
       ./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/fuse  
 
      - start up fabric in fuse console: fabric:create --wait-for-provisioning  
+     
+     - run 'mvn clean install -DskipTests' from projects/usecase1 (for each use case)
   
-     - run 'mvn fabric8:deploy' from projects/usecase1
+     - run 'mvn fabric8:deploy -DskipTests' from projects/usecase1 (for each use case)
   
      - login to Fuse management console at:
   
       http://localhost:8181    (u:admin/p:admin)
 
       - connect to root container with login presented by console  (u:admin/p:admin)  
-      - edit dvfusedemo profile to include the Teiid JDBC driver  
-     or use the following command in the bin/admin shell  
-         profile-edit --bundles wrap:file:///<install-dir>/teiid-8.4.1-redhat-7-jdbc.jar dvfusedemo 1.0  
-    where install-dir = <dir>/dv-fuse-integration-demo/target/dv/jboss-eap-6.1/dataVirtualization/jdbc  
-    - create container name c1 and add usecase1 and jboss-fuse-minimal profile  
-      or use the following command in the bin/admin shell  
-	fabric:container-create-child --profile usecase1 --profile jboss-fuse-minimal root c1  
+      
+      - edit usecase1 (each profile) profile to include the Teiid JDBC driver  
+	 or use the following command in the bin/admin shell  
+         profile-edit --bundles wrap:file:///<install-dir>/teiid-8.4.1-redhat-7-jdbc.jar usecase1 1.0  
+         where install-dir = <dir>/dv-fuse-integration-demo/target/dv/jboss-eap-6.1/dataVirtualization/jdbc  
+    
+      - create container name c1 and add usecase1 (add all use cases) and jboss-fuse-minimal profile  
+	or use the following command in the bin/admin shell  
+	fabric:container-create-child --profile usecase1 --profile jboss-fuse-minimal root c1   
   
-    - open c1 container to view route under 'Diagram' tab  
-                                                                                                                                                                         
-   View the Use Case Project                                                                     
-                                                                                       
-       mvn test ....                                                   
+    - open c1 container to view route under 'Diagram' tab (use case 1 timer) (UC2 timer) (UC4 jetty container input)                                                                                                                                                                                                                         
 
    ``` 
 
