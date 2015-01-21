@@ -1,4 +1,4 @@
-package sa.demo.fuse.jdv.usecase1;
+package sa.demo.fuse.jdv.usecase2;
 
 /**
  * An interface for implementing Hello services.
