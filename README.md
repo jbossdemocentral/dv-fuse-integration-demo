@@ -14,9 +14,9 @@ Quickstart
 
 2. Add the DV and Fuse Products to the software directory.
 
-3. Run 'init.sh' to setup the environment locally.
+3. Run 'init.sh' to setup the environment locally.  (Docker and Openshift will be added)
 
-4. Start the servers and run the test cases.
+4. Start the servers and run the test cases.  (some of these steps will be added to run.sh) 
   
    ```  
    a. First make sure the fabric server passwords for the Maven Plugin is in your ~/.m2/settings.xml file so that the maven plugin can login to the fabric. 
