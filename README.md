@@ -16,7 +16,9 @@ Quickstart
 
 3. Run 'init.sh' to setup the environment locally.  (Docker and Openshift will be added)
 
-4. Start the servers and run the test cases.  (some of these steps will be added to run.sh) 
+4. Start the servers and run the test cases.  The manual steps are listed below.  If you prefer you can run the run.sh to  
+run the servers and test cases.  A timer starts the route for the use cases so you can watch the console log to  
+watch the output of the route.
   
    ```  
    a. First make sure the fabric server passwords for the Maven Plugin is in your ~/.m2/settings.xml file so that the maven plugin can login to the fabric. 
