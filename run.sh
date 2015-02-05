@@ -6,20 +6,29 @@
 #
 # author: cojan.van.ballegooijen@redhat.com
 #
-KARAF_LOG=./target/fuse/jboss-fuse-6.1.0.redhat-379/data/log/karaf.log
-rm $KARAF_LOG </dev/null
-touch $KARAF_LOG
+FUSE_DIR=$PWD/target/fuse/jboss-fuse-6.1.0.redhat-379
+DV_DIR=$PWD/target/dv/jboss-eap-6.1
+KARAF_LOG=$FUSE_DIR/data/log/karaf.log
+if [ -f "$KARAF_LOG" ]
+then
+	rm $KARAF_LOG </dev/null
+	touch $KARAF_LOG </dev/null
+fi
 echo 
-echo "Starting JBoss Fuse"
+$FUSE_DIR/bin/start  
+echo "Starting JBoss Fuse and wait for 30 seconds" 
 echo
-./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/start  
+
+$FUSE_DIR/bin/start  
+sleep 30 
 echo 
 echo "Starting JBoss Data Virtualization"
 echo
-nohup ./target/dv/jboss-eap-6.1/bin/standalone.sh > dv.log 2>&1 </dev/null & 
-if [ ! -d ./target/fuse/jboss-fuse-6.1.0.redhat-379/instances/c1 ]
+nohup $DV_DIR/bin/standalone.sh > dv.log 2>&1 </dev/null & 
+
+if [ ! -d "$FUSE_DIR/instances/c1" ]
 then
-	./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/client -u admin -p admin "fabric:create --wait-for-provisioning"
+	$FUSE_DIR/bin/client -u admin -p admin "fabric:create --wait-for-provisioning" -r 3
 	cd projects/usecase1
 	mvn clean install -DskipTests 
 	mvn fabric8:deploy -DskipTests  
@@ -30,10 +39,10 @@ then
 	mvn clean install -DskipTests 
 	mvn fabric8:deploy -DskipTests  
 	cd ../..
-	./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/client -u admin -p admin "profile-edit --bundles wrap:file:///$PWD/target/dv/jboss-eap-6.1/dataVirtualization/jdbc/teiid-8.4.1-redhat-7-jdbc.jar usecase1 1.0"  
-	./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/client -u admin -p admin "profile-edit --bundles wrap:file:///$PWD/target/dv/jboss-eap-6.1/dataVirtualization/jdbc/teiid-8.4.1-redhat-7-jdbc.jar usecase2 1.0"  
-	./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/client -u admin -p admin "profile-edit --bundles wrap:file:///$PWD/target/dv/jboss-eap-6.1/dataVirtualization/jdbc/teiid-8.4.1-redhat-7-jdbc.jar usecase4 1.0"  
-	./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/client -u admin -p admin "fabric:container-create-child --profile usecase1 --profile usecase2 --profile usecase4 --profile jboss-fuse-minimal root c1"   
+	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.4.1-redhat-7-jdbc.jar usecase1 1.0" -r 3 
+	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.4.1-redhat-7-jdbc.jar usecase2 1.0" -r 3 
+	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.4.1-redhat-7-jdbc.jar usecase4 1.0" -r 3 
+	$FUSE_DIR/bin/client -u admin -p admin "fabric:container-create-child --profile usecase1 --profile usecase2 --profile usecase4 --profile jboss-fuse-minimal root c1" -r 3  
 fi
 # Some wait code. Wait till the system is ready. 
 STARTUP_WAIT=60
@@ -50,4 +59,4 @@ do
     sleep 1
     let count=$count+1;
 done
-./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/client -u admin -p admin "fabric:container-start -f c1"
+$FUSE_DIR/bin/client -u admin -p admin "fabric:container-start -f c1"
