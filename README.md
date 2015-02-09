@@ -68,6 +68,11 @@ watch the output of the route.
 
    ``` 
 
+Docker Option:
+------------
+
+The demo can be run in a docker container. Full instructions can be found in [support/docker/README.md](support/docker/README.md).
+
 Coming soon:
 ------------
    
