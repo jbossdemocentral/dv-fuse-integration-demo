@@ -4,7 +4,7 @@ This demo project will get you started with automatically installing two server 
   
   Use case 1 - Use the JDBC component to access a virtual database  
   Use case 2 - Use the SQL component to access a virtual database  
-  Use case 3 - Use the Olingo component to access a virtual database (this will be added when Fuse 6.2 is released)  
+  Use case 3 - Use the Olingo component to access a virtual database (this is planned for the Fuse 6.2 release)  
   Use case 4 - Use the REST component to access a virtual database  
   
 Quickstart  
@@ -21,51 +21,13 @@ run the servers and test cases.  A timer starts the route for the use cases so y
 watch the output of the route.
   
    ```  
-   a. First make sure the fabric server passwords for the Maven Plugin is in your ~/.m2/settings.xml file so that the maven plugin can login to the fabric. 
-      
-      <server>  
-	<id>fabric8.upload.repo</id>  
-	<username>admin</username>  
-	<password>admin</password>  
-      </server>  
-      
-   b. Start JBoss Data Virtualization with:  
-      
-      ./target/dv/jboss-eap-6.1/bin/standalone.sh  
-  
-   c. Login to JBoss Data Virtualization to view the CustomerCOntextVDB with the CustomerContextView.   
-  
-      http://localhost:8080/ (u:admin/p:redhat1!)  
-  
-   d. Start JBoss Fuse with:  
+   a. First make sure the fabric server passwords for the Maven Plugin is in your ~/.m2/settings.xml file so that the maven plugin can login to the fabric.  
+      See the example in the support/settings.xml file.  Also make sure JAVA_HOME is setup, such as - export JAVA_HOME="/etc/alternatives/java_sdk" - on Fedora.  
 
-      ./target/fuse/jboss-fuse-6.1.0.redhat-379/bin/fuse  
-  
-   e. Start up fabric in fuse console: fabric:create --wait-for-provisioning  
-  
-   f. Run 'mvn clean install -DskipTests' from projects/usecase1 (for each use case)  
-  
-   g. Run 'mvn fabric8:deploy -DskipTests' from projects/usecase1 (for each use case)  
-  
-   h. Login to Fuse management console at:  
-  
-      http://localhost:8181    (u:admin/p:admin)  
-  
-   i. Connect to the root container with login presented by console  (u:admin/p:admin)  
+   b. Run 'run.sh' to start the servers, create the container and deploy the bundles.  
       
-   f. Edit usecase1 profile to include the Teiid JDBC driver (for each use case) or use the following command in the bin/admin shell  
+   c. Sign onto the Fuse Management console and check the console log to see the output from the routes for the use cases.  You can also view the Camel Diagrams.  
    
-      profile-edit --bundles wrap:file:///<install-dir>/teiid-8.4.1-redhat-7-jdbc.jar usecase1 1.0  
-      where install-dir = <dir>/dv-fuse-integration-demo/target/dv/jboss-eap-6.1/dataVirtualization/jdbc  
-    
-   k. Create container name c1 and add usecase1 (add all use cases) and jboss-fuse-minimal profile or use the following command in the bin/admin shell  
-  
-      fabric:container-create-child --profile usecase1 --profile jboss-fuse-minimal root c1   
-  
-   l. Open c1 container to view route under 'Diagram' tab (use case 1 and 2 use timer; use case 4 use jetty container input)  
-   
-   m. Open the log to view the output from the route
-
    ``` 
 
 Coming soon:
