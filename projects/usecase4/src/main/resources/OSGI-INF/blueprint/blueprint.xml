@@ -10,7 +10,7 @@
 
   <camelContext trace="false" id="blueprintContext" xmlns="http://camel.apache.org/schema/blueprint">
     <route id="usecase4">
-        <from uri="jetty:http://localhost:9000/usecase4"/>
+        <from uri="jetty:http://0.0.0.0:9000/usecase4"/>
     	<to uri="http://localhost:8080/odata/CustomerContextVDB/CustomerContext?authMethod=Basic&amp;authUsername=user&amp;authPassword=user&amp;bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
     </route>
 </camelContext>
