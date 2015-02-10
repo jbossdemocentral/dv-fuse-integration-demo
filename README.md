@@ -43,6 +43,4 @@ Released versions
 
 See the tagged releases for the following versions of the product:
 
-- v3.0 - Updates from Bill, Cojan, Kenny and Windows/Docker updates from Andrew
-- v2.0 - Bill, Cojan, Kenny first build
-- v1.0 - Kenny Peeples initial setup
+- v1.0.0 - Initial Release and Updates from Bill, Cojan, Kenny; Windows/Docker updates from Andrew
