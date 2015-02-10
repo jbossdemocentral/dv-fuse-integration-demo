@@ -7,28 +7,21 @@ This demo project will get you started with automatically installing two server 
   Use case 3 - Use the Olingo component to access a virtual database (this is planned for the Fuse 6.2 release)  
   Use case 4 - Use the REST component to access a virtual database  
   
-Quickstart  
-----------  
-
-1. [Download and unzip.](https://github.com/DataVirtualizationByExample/dv-fuse-integration-demo/archive/master.zip). If running on Windows, it is reccommended the project be extracted to a location near the root drive path due to limitations of length of file/path names.
-
-2. Add the DV and Fuse Products to the software directory.
-
-3. Run 'init.sh' or 'init.bat' to setup the environment locally. 'init.bat' must be run with Administrative privileges (Docker and Openshift will be added)
-
-4. Start the servers and run the test cases.  The manual steps are listed below.  If you prefer you can run the run.sh to  
-run the servers and test cases.  A timer starts the route for the use cases so you can watch the console log to  
-watch the output of the route.
+Local Install Option:  
+---------------------    
+NOTE:  Make sure the fabric server passwords for the Maven Plugin is in your ~/.m2/settings.xml file so that the maven plugin can login to the fabric.  
+See the example in the support/settings.xml file.  Also make sure JAVA_HOME is setup, such as - export JAVA_HOME="/etc/alternatives/java_sdk" - on Fedora.  
   
-   ```  
-   a. First make sure the fabric server passwords for the Maven Plugin is in your ~/.m2/settings.xml file so that the maven plugin can login to the fabric.  
-      See the example in the support/settings.xml file.  Also make sure JAVA_HOME is setup, such as - export JAVA_HOME="/etc/alternatives/java_sdk" - on Fedora.  
-
-   b. Run 'run.sh' to start the servers, create the container and deploy the bundles.  
-      
-   c. Sign onto the Fuse Management console and check the console log to see the output from the routes for the use cases.  You can also view the Camel Diagrams.  
-   
-   ``` 
+1. [Download and unzip.](https://github.com/DataVirtualizationByExample/dv-fuse-integration-demo/archive/master.zip).  If running on Windows, it is reccommended the project be extracted to a location near the root drive path due to limitations of length of file/path names.  
+  
+2. Add the DV and Fuse Products to the software directory.  
+  
+3. Run 'init.sh' or 'init.bat' to setup the environment locally. 'init.bat' must be run with Administrative privileges.  
+  
+4. Run 'run.sh' or 'run.bat' to start the servers, create the container and deploy the bundles.  
+  
+5. Sign onto the Fuse Management console and check the console log to see the output from the routes for the use cases.  You can also view the Camel Diagrams.  
+  
 
 Docker Option:
 ------------
