@@ -23,8 +23,8 @@
 	  <property name="dataSource" ref="datasource"/>
 	</bean>
 
-  <camelContext trace="false" id="blueprintContext" xmlns="http://camel.apache.org/schema/blueprint">
-    <route>
+  <camelContext trace="false" id="usecase2-context" xmlns="http://camel.apache.org/schema/blueprint">
+    <route id="mainRoute">
         <from uri="timer://foo?fixedRate=true&amp;period=60000"/>
         <log message="The in message contains =&gt; ${body}"/>
         <to uri="sql:select * from CustomerContextView.CustomerContext"/>
