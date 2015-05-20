@@ -6,7 +6,7 @@ This demo project will get you started with automatically installing two server 
   
   Use case 1 - Use the JDBC component to access a virtual database  
   Use case 2 - Use the SQL component to access a virtual database  
-  Use case 3 - Use the Olingo component to access a virtual database (this is planned for the Fuse 6.2 release)  
+  Use case 3 - Use the Olingo component to access a virtual database  
   Use case 4 - Use the REST component to access a virtual database  
   
   NOTE:  Make sure the fabric server passwords for the Maven Plugin is in your ~/.m2/settings.xml file so that the maven plugin can login to the fabric.  See the example in the support/settings.xml file.  Also make sure JAVA_HOME is setup, such as - export JAVA_HOME="/etc/alternatives/java_sdk" - on Fedora.  
