@@ -2,6 +2,8 @@ JBoss DV and Fuse (Camel) Integration Demo
 ======================================
 This demo project will get you started with automatically installing two server instances, one with JBoss Data Virtualization and the other with JBoss Fuse, and then configuring 4 examples for accessing data through Camel.
   
+  ![Architecture Overview](https://github.com/jbossdemocentral/dv-fuse-integration-demo/blob/master/docs/demo-images/demoarchitectureoverview.png)
+  
   Use case 1 - Use the JDBC component to access a virtual database  
   Use case 2 - Use the SQL component to access a virtual database  
   Use case 3 - Use the Olingo component to access a virtual database (this is planned for the Fuse 6.2 release)  
@@ -36,7 +38,8 @@ Coming soon:
 
 Supporting Articles
 -------------------
-N/A  
+
+  [Using a Customer Context with the Camel Components and Data Virtualization](http://www.ossmentor.com/2015/03/using-customer-context-with-fuse.html)
 
 Released versions
 -----------------
