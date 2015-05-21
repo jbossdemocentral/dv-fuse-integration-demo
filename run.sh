@@ -18,8 +18,6 @@ echo
 $FUSE_DIR/bin/start  
 echo "Starting JBoss Fuse and wait for 30 seconds" 
 echo
-
-$FUSE_DIR/bin/start  
 sleep 30 
 echo 
 echo "Starting JBoss Data Virtualization"

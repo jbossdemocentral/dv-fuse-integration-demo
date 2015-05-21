@@ -75,7 +75,7 @@ echo
 echo Product installer running now...
 echo
 
-java -jar $SRC_DIR/$DV $DV_SUPPORT_DIR/InstallationScript.xml 
+java -jar $SRC_DIR/$DV $DV_SUPPORT_DIR/InstallationScript6.0.xml
 
 read -p "Post DV install configuration <hit return or wait 5 seconds>" -t 5
 echo

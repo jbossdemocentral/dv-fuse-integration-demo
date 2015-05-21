@@ -7,7 +7,7 @@ set AUTHORS=Kenny Peeples, Bill Kemp, Cojan van Ballegooijen, Andrew Block
 set PROJECT=git@github.com:kpeeples/dv-fuse-integration-demo.git
 set PRODUCT=JBoss DV and Fuse Integration Demo
 set JBOSS_HOME=%PROJECT_HOME%target\jboss-eap-6.1
-set JBOSS_HOME_DV=%PROJECT_HOME%target\dv\jboss-eap-6.1
+set JBOSS_HOME_DV=%PROJECT_HOME%target\dv
 set JBOSS_HOME_FUSE=%PROJECT_HOME%target\fuse\jboss-fuse-6.1.0.redhat-379
 set SERVER_DIR=%JBOSS_HOME%\standalone\deployments\
 set SERVER_CONF=%JBOSS_HOME%\standalone\configuration\
@@ -22,9 +22,9 @@ set DV_SUPPORT_DIR=%SUPPORT_DIR%\dv-support
 set FUSE_SUPPORT_DIR=%SUPPORT_DIR%\fuse-support
 set PRJ_DIR=%PROJECT_HOME%projects
 set FUSE=jboss-fuse-full-6.1.0.redhat-379.zip
-set DV=jboss-dv-installer-6.0.0.GA-redhat-4.jar
+set DV=jboss-dv-installer-6.1.0.redhat-3.jar
 set FUSE_VERSION=6.1.0
-set DV_VERSION=6.0.0
+set DV_VERSION=6.1.0
 
 REM wipe screen.
 cls

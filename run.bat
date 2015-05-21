@@ -10,7 +10,7 @@ REM
 
 set PROJECT_HOME=%~dp0
 set FUSE_DIR=%PROJECT_HOME%target\fuse\jboss-fuse-6.1.0.redhat-379
-set DV_DIR=%PROJECT_HOME%target\dv\jboss-eap-6.1
+set DV_DIR=%PROJECT_HOME%target\dv
 set KARAF_LOG=%FUSE_DIR%\data\log\fuse.log
 
 if exist "%KARAF_LOG%" (
