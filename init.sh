@@ -106,6 +106,9 @@ else
 	exit
 fi
 
+echo "  - enabling demo accounts logins in users.properties file..."
+echo
+cp $FUSE_SUPPORT_DIR/users.properties $SERVER_CONF_FUSE
 
 # Final instructions to user to start and run demo.                                                                  
 echo
