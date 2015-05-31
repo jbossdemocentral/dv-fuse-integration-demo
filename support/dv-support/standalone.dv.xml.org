@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<server xmlns="urn:jboss:domain:1.6">
+<server xmlns="urn:jboss:domain:1.4">
 
     <extensions>
         <extension module="org.jboss.as.clustering.infinispan"/>
@@ -30,29 +30,17 @@
     </extensions>
 
 
-    <vault>
-        <vault-option name="KEYSTORE_URL" value="${jboss.home.dir}/vault.keystore"/>
-        <vault-option name="KEYSTORE_PASSWORD" value="MASK-1gFc8LeZe.00GwNzte55CN"/>
-        <vault-option name="KEYSTORE_ALIAS" value="vault"/>
-        <vault-option name="SALT" value="8675309K"/>
-        <vault-option name="ITERATION_COUNT" value="50"/>
-        <vault-option name="ENC_FILE_DIR" value="${jboss.home.dir}/vault/"/>
-    </vault>
-
     <management>
         <security-realms>
             <security-realm name="ManagementRealm">
                 <authentication>
-                    <local default-user="$local" skip-group-loading="true"/>
+                    <local default-user="$local"/>
                     <properties path="mgmt-users.properties" relative-to="jboss.server.config.dir"/>
                 </authentication>
-                <authorization map-groups-to-roles="false">
-                    <properties path="mgmt-groups.properties" relative-to="jboss.server.config.dir"/>
-                </authorization>
             </security-realm>
             <security-realm name="ApplicationRealm">
                 <authentication>
-                    <local default-user="$local" allowed-users="*" skip-group-loading="true"/>
+                    <local default-user="$local" allowed-users="*"/>
                     <properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
                 </authentication>
                 <authorization>
@@ -60,19 +48,6 @@
                 </authorization>
             </security-realm>
         </security-realms>
-        <audit-log>
-            <formatters>
-                <json-formatter name="json-formatter"/>
-            </formatters>
-            <handlers>
-                <file-handler name="file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.server.data.dir"/>
-            </handlers>
-            <logger log-boot="true" log-read-only="false" enabled="false">
-                <handlers>
-                    <handler name="file"/>
-                </handlers>
-            </logger>
-        </audit-log>
         <management-interfaces>
             <native-interface security-realm="ManagementRealm">
                 <socket-binding native="management-native"/>
@@ -81,47 +56,19 @@
                 <socket-binding http="management-http"/>
             </http-interface>
         </management-interfaces>
-        <access-control provider="simple">
-            <role-mapping>
-                <role name="SuperUser">
-                    <include>
-                        <user name="$local"/>
-                    </include>
-                </role>
-            </role-mapping>
-        </access-control>
     </management>
 
     <profile>
-        <subsystem xmlns="urn:jboss:domain:logging:1.4">
-            <async-handler name="TEIID_COMMAND_LOG">
-                <level name="DEBUG"/>
-                <queue-length value="50"/>
-                <overflow-action value="block"/>
-                <subhandlers>
-                    <handler name="TEIID_JPA_LOG"/>
-                </subhandlers>
-            </async-handler>
-            <async-handler name="TEIID_AUDIT_LOG">
-                <level name="DEBUG"/>
-                <queue-length value="50"/>
-                <overflow-action value="block"/>
-                <subhandlers>
-                    <handler name="TEIID_JPA_LOG"/>
-                </subhandlers>
-            </async-handler>
+        <subsystem xmlns="urn:jboss:domain:logging:1.2">
             <console-handler name="CONSOLE">
                 <level name="INFO"/>
                 <formatter>
-                    <named-formatter name="COLOR-PATTERN"/>
+                    <pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
                 </formatter>
             </console-handler>
-            <custom-handler name="TEIID_JPA_LOG" class="org.teiid.logger.DatabaseAppender" module="org.jboss.teiid.extensions">
-                <level name="DEBUG"/>
-            </custom-handler>
             <periodic-rotating-file-handler name="FILE" autoflush="true">
                 <formatter>
-                    <named-formatter name="PATTERN"/>
+                    <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
                 </formatter>
                 <file relative-to="jboss.server.log.dir" path="server.log"/>
                 <suffix value=".yyyy-MM-dd"/>
@@ -152,17 +99,11 @@
                     <handler name="FILE"/>
                 </handlers>
             </root-logger>
-            <formatter name="PATTERN">
-                <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
-            </formatter>
-            <formatter name="COLOR-PATTERN">
-                <pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%E%n"/>
-            </formatter>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:datasources:1.2">
+        <subsystem xmlns="urn:jboss:domain:datasources:1.1">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</connection-url>
                     <driver>h2</driver>
                     <security>
                         <user-name>sa</user-name>
@@ -179,29 +120,10 @@
                 </datasource>
                 <datasource jndi-name="java:/datasources/ModeShapeDS" pool-name="ModeShapeDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:jcr:jndi:jcr?repositoryName=dv</connection-url>
-                    <connection-property name="teiidsupport">
-                        true
-                    </connection-property>
                     <driver>modeshape</driver>
                     <security>
-                        <user-name>modeshapeUser</user-name>
-                        <password>${VAULT::modeshape::modeshape.password::1}</password>
-                    </security>
-                </datasource>
-                <datasource jndi-name="java:/teiid-log-ds" pool-name="teiid-log-ds" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:file:${jboss.server.data.dir}/teiid-logging/teiid-logging-ds;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>${VAULT::teiid::dblogging.password::1}</password>
-                    </security>
-                </datasource>
-                <datasource jndi-name="java:/accounts-ds" pool-name="h2" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:accounts;INIT=RUNSCRIPT FROM '${jboss.home.dir}/teiidfiles/customer-schema.sql';</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
+                        <user-name>admin</user-name>
+                        <password>admin</password>
                     </security>
                 </datasource>
                 <drivers>
@@ -225,10 +147,9 @@
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
             <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:ee:1.2">
+        <subsystem xmlns="urn:jboss:domain:ee:1.1">
             <spec-descriptor-property-replacement>false</spec-descriptor-property-replacement>
             <jboss-descriptor-property-replacement>true</jboss-descriptor-property-replacement>
-            <annotation-property-replacement>false</annotation-property-replacement>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ejb3:1.4">
             <session-bean>
@@ -265,7 +186,7 @@
             <default-security-domain value="other"/>
             <default-missing-method-permissions-deny-access value="true"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:infinispan:1.5">
+        <subsystem xmlns="urn:jboss:domain:infinispan:1.4">
             <cache-container name="web" aliases="standard-session-cache" default-cache="local-web" module="org.jboss.as.clustering.web.infinispan">
                 <local-cache name="local-web" batching="true">
                     <file-store passivation="false" purge="false"/>
@@ -289,8 +210,7 @@
             </cache-container>
             <cache-container name="modeshape" module="org.modeshape">
                 <local-cache name="dv">
-                    <locking isolation="READ_COMMITTED"/>
-                    <transaction mode="NON_XA" locking="PESSIMISTIC"/>
+                    <transaction mode="NON_XA"/>
                     <file-store relative-to="jboss.server.data.dir" path="modeshape/store/dv" passivation="false" purge="false"/>
                 </local-cache>
             </cache-container>
@@ -335,7 +255,7 @@
             <cached-connection-manager/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:jdr:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:jmx:1.3">
+        <subsystem xmlns="urn:jboss:domain:jmx:1.2">
             <expose-resolved-model/>
             <expose-expression-model/>
             <remoting-connector/>
@@ -349,7 +269,7 @@
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
             </mail-session>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:naming:1.4">
+        <subsystem xmlns="urn:jboss:domain:naming:1.3">
             <remote-naming/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
@@ -364,6 +284,9 @@
                 <resource-adapter id="google">
                     <module slot="main" id="org.jboss.teiid.resource-adapter.google"/>
                 </resource-adapter>
+                <resource-adapter id="infinispan">
+                    <module slot="main" id="org.jboss.teiid.resource-adapter.infinispan"/>
+                </resource-adapter>
                 <resource-adapter id="ldap">
                     <module slot="main" id="org.jboss.teiid.resource-adapter.ldap"/>
                 </resource-adapter>
@@ -375,35 +298,6 @@
                 </resource-adapter>
                 <resource-adapter id="mongodb">
                     <module slot="main" id="org.jboss.teiid.resource-adapter.mongodb"/>
-                </resource-adapter>
-                <resource-adapter id="accumulo">
-                    <module slot="main" id="org.jboss.teiid.resource-adapter.accumulo"/>
-                </resource-adapter>
-                <resource-adapter id="fileQS">
-                    <module slot="main" id="org.jboss.teiid.resource-adapter.file"/>
-                    <connection-definitions>
-                        <connection-definition class-name="org.teiid.resource.adapter.file.FileManagedConnectionFactory" jndi-name="java:/marketdata-file" enabled="true" use-java-context="true" pool-name="fileDS">
-                            <config-property name="AllowParentPaths">
-                                true
-                            </config-property>
-                            <config-property name="ParentDirectory">
-                                ${jboss.home.dir}/teiidfiles/data/
-                            </config-property>
-                        </connection-definition>
-                    </connection-definitions>
-                </resource-adapter>
-                <resource-adapter id="fileQSExcel">
-                    <module slot="main" id="org.jboss.teiid.resource-adapter.file"/>
-                    <connection-definitions>
-                        <connection-definition class-name="org.teiid.resource.adapter.file.FileManagedConnectionFactory" jndi-name="java:/excel-file" enabled="true" use-java-context="true" pool-name="fileDS">
-                            <config-property name="AllowParentPaths">
-                                true
-                            </config-property>
-                            <config-property name="ParentDirectory">
-                                ${jboss.home.dir}/teiidfiles/excelFiles/
-                            </config-property>
-                        </connection-definition>
-                    </connection-definitions>
                 </resource-adapter>
                 <resource-adapter id="CustomerFlatFileSourceModel">
                     <module slot="main" id="org.jboss.teiid.resource-adapter.file"/>
@@ -454,26 +348,29 @@
                 </security-domain>
                 <security-domain name="teiid-security" cache-type="default">
                     <authentication>
-                        <login-module code="RealmDirect" flag="sufficient">
-                            <module-option name="password-stacking" value="useFirstPass"/>
+                        <login-module code="org.jboss.security.auth.spi.UsersRolesLoginModule" flag="required">
+                            <module-option name="usersProperties" value="${jboss.server.config.dir}/teiid-security-users.properties"/>
+                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/teiid-security-roles.properties"/>
                         </login-module>
                     </authentication>
                 </security-domain>
                 <security-domain name="modeshape-security">
                     <authentication>
-                        <login-module code="RealmDirect" flag="required">
-                            <module-option name="password-stacking" value="useFirstPass"/>
+                        <login-module code="UsersRoles" flag="required">
+                            <module-option name="usersProperties" value="${jboss.server.config.dir}/modeshape-users.properties"/>
+                            <module-option name="rolesProperties" value="${jboss.server.config.dir}/modeshape-roles.properties"/>
                         </login-module>
                     </authentication>
                 </security-domain>
             </security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:threads:1.1">
-            <unbounded-queue-thread-pool name="teiid-async">
+            <bounded-queue-thread-pool name="teiid-async">
+                <queue-length count="100"/>
                 <max-threads count="4"/>
-            </unbounded-queue-thread-pool>
+            </bounded-queue-thread-pool>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:transactions:1.5">
+        <subsystem xmlns="urn:jboss:domain:transactions:1.3">
             <core-environment>
                 <process-id>
                     <uuid/>
@@ -482,9 +379,9 @@
             <recovery-environment socket-binding="txn-recovery-environment" status-socket-binding="txn-status-manager"/>
             <coordinator-environment default-timeout="300"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:web:2.1" default-virtual-server="default-host" native="false">
+        <subsystem xmlns="urn:jboss:domain:web:1.4" default-virtual-server="default-host" native="false">
             <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>
-            <virtual-server name="default-host" enable-welcome-root="false">
+            <virtual-server name="default-host" enable-welcome-root="true">
                 <alias name="localhost"/>
                 <alias name="example.com"/>
             </virtual-server>
@@ -503,11 +400,6 @@
         <subsystem xmlns="urn:jboss:domain:weld:1.0"/>
         <subsystem xmlns="urn:jboss:domain:modeshape:1.0">
             <repository name="dv" cache-name="dv" cache-container="modeshape" anonymous-roles="readonly">
-                <workspaces>
-                    <initial-content>
-                        initial-content-default.xml
-                    </initial-content>
-                </workspaces>
                 <sequencers>
                     <sequencer name="delimited-text-sequencer" classname="org.modeshape.sequencer.text.DelimitedTextSequencer" module="org.modeshape.sequencer.text" splitPattern="," path-expression="/files(//*.csv[*])/jcr:content[@jcr:data] => /derived/text/delimited/$1"/>
                     <sequencer name="fixed-width-text-sequencer" classname="org.modeshape.sequencer.text.FixedWidthTextSequencer" module="org.modeshape.sequencer.text" commentMarker="#" path-expression="/files(//*.txt[*])/jcr:content[@jcr:data] => /derived/text/fixedWidth/$1"/>
@@ -523,7 +415,6 @@
             </repository>
             <webapp name="modeshape-rest.war"/>
             <webapp name="modeshape-webdav.war"/>
-            <webapp name="modeshape-cmis.war"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:teiid:1.0">
             <async-thread-pool>teiid-async</async-thread-pool>
@@ -569,15 +460,12 @@
             <translator name="ws" module="org.jboss.teiid.translator.ws"/>
             <translator name="salesforce" module="org.jboss.teiid.translator.salesforce"/>
             <translator name="hive" module="org.jboss.teiid.translator.hive"/>
+            <translator name="infinispan-cache" module="org.jboss.teiid.translator.object"/>
+            <translator name="map-cache" module="org.jboss.teiid.translator.object"/>
             <translator name="google-spreadsheet" module="org.jboss.teiid.translator.google"/>
             <translator name="odata" module="org.jboss.teiid.translator.odata"/>
             <translator name="sap-nw-gateway" module="org.jboss.teiid.translator.odata"/>
             <translator name="mongodb" module="org.jboss.teiid.translator.mongodb"/>
-            <translator name="cassandra" module="org.jboss.teiid.translator.cassandra"/>
-            <translator name="accumulo" module="org.jboss.teiid.translator.accumulo"/>
-            <translator name="solr" module="org.jboss.teiid.translator.solr"/>
-            <translator name="excel" module="org.jboss.teiid.translator.excel"/>
-            <translator name="impala" module="org.jboss.teiid.translator.hive"/>
         </subsystem>
     </profile>
 
@@ -611,14 +499,5 @@
     </socket-binding-group>
 
     <deployments>
-        <deployment name="teiid-dashboard-builder.war" runtime-name="teiid-dashboard-builder.war">
-            <fs-exploded path="dataVirtualization/teiid-dashboard/teiid-dashboard-builder.war/" relative-to="jboss.home.dir"/>
-        </deployment>
-        <deployment name="ModeShape.vdb" runtime-name="ModeShape.vdb">
-            <content sha1="f03ca1b179afd09e09b02f239d4adb35a1d248df"/>
-        </deployment>
-        <deployment name="database-service.jar" runtime-name="database-service.jar">
-            <content sha1="46de0cfbcee1270f624da4b74c233befcd2b7cb8"/>
-        </deployment>
     </deployments>
 </server>

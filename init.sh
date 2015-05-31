@@ -3,25 +3,20 @@ DEMO="JBoss Data Virtualization & Fuse Integration Demo"
 AUTHORS="Kenny Peeples, Bill Kemp, Cojan van Ballegooijen"
 PROJECT="git@github.com:kpeeples/dv-fuse-integration-demo.git"
 PRODUCT="JBoss DV & Fuse Integration Demo"
-JBOSS_HOME=./target/jboss-eap-6.1
-JBOSS_HOME_DV=./target/dv/jboss-eap-6.1
-JBOSS_HOME_FUSE=./target/fuse/jboss-fuse-6.1.0.redhat-379
-SERVER_DIR=$JBOSS_HOME/standalone/deployments/
-SERVER_CONF=$JBOSS_HOME/standalone/configuration/
-SERVER_BIN=$JBOSS_HOME/bin
+JBOSS_HOME_DV=./target/dv/jboss-eap-6.3
+JBOSS_HOME_FUSE=./target/fuse/jboss-fuse-6.2.0.redhat-117
 SERVER_BIN_DV=$JBOSS_HOME_DV/bin
 SERVER_BIN_FUSE=$JBOSS_HOME_FUSE/bin
-SERVER_DIR=$JBOSS_HOME/standalone/deployments/
 SERVER_CONF_DV=$JBOSS_HOME_DV/standalone/configuration/
 SERVER_CONF_FUSE=$JBOSS_HOME_FUSE/etc
 SRC_DIR=./software
 DV_SUPPORT_DIR=./support/dv-support
 FUSE_SUPPORT_DIR=./support/fuse-support
 PRJ_DIR=./projects
-FUSE=jboss-fuse-full-6.1.0.redhat-379.zip
-DV=jboss-dv-installer-6.0.0.GA-redhat-4.jar
-FUSE_VERSION=6.1.0
-DV_VERSION=6.0.0
+FUSE=jboss-fuse-full-6.2.0.redhat-117.zip
+DV=jboss-dv-installer-6.1.0.redhat-3.jar
+FUSE_VERSION=6.2.0
+DV_VERSION=6.1.0
 
 # wipe screen.
 clear 
@@ -75,7 +70,7 @@ echo
 echo Product installer running now...
 echo
 
-java -jar $SRC_DIR/$DV $DV_SUPPORT_DIR/InstallationScript6.0.xml
+java -jar $SRC_DIR/$DV $DV_SUPPORT_DIR/InstallationScript6.1.xml
 
 read -p "Post DV install configuration <hit return or wait 5 seconds>" -t 5
 echo
@@ -83,7 +78,7 @@ echo
 echo
 echo "  - install teiid security files..."
 echo
-cp $DV_SUPPORT_DIR/teiid* $SERVER_CONF_DV
+cp $DV_SUPPORT_DIR/application* $SERVER_CONF_DV
 
 echo
 echo "  - move data files..."
@@ -111,19 +106,10 @@ else
 	exit
 fi
 
-echo "  - enabling demo accounts logins in users.properties file..."
-echo
-cp $FUSE_SUPPORT_DIR/users.properties $SERVER_CONF_FUSE
-
-echo "  - enabling useCase 3 properties file..."
-echo
-cp $FUSE_SUPPORT_DIR/com.demo.usecase3.odata.cfg $SERVER_CONF_FUSE
-
-
 
 # Final instructions to user to start and run demo.                                                                  
 echo
-echo "See Readme for any additional steps"                   
+echo "See README.md for any additional steps"                   
 echo "$DEMO Setup Complete."
 echo
 

@@ -20,8 +20,32 @@
     <fabric8.features>camel-jdbc</fabric8.features>
     <fabric8.featureRepos>mvn:org.apache.camel.karaf/apache-camel/${version:camel}/xml/features</fabric8.featureRepos>
   </properties>
-
  <repositories>
+     <repository>
+       <id>redhat-techpreview-repository</id>
+       <name>Red Hat TechPreview Repository</name>
+       <url>http://maven.repository.redhat.com/techpreview/all</url>
+	   <snapshots>
+          <enabled>false</enabled>
+       </snapshots>
+       <releases>
+           <enabled>true</enabled>
+       </releases>
+    </repository>
+    
+    <repository>
+       <id>fuse-public-repository</id>
+       <name>FuseSource Community Release Repository</name>
+       <url>https://repo.fusesource.com/nexus/content/groups/public</url>
+	   <snapshots>
+          <enabled>false</enabled>
+       </snapshots>
+       <releases>
+           <enabled>true</enabled>
+           <updatePolicy>never</updatePolicy>
+       </releases>
+    </repository>
+    
     <repository>
       <id>release.fusesource.org</id>
       <name>FuseSource Release Repository</name>
@@ -60,6 +84,30 @@
 
 
   <pluginRepositories>
+ 	<pluginRepository>
+	    <id>redhat-techpreview-repository</id>
+        <name>Red Hat TechPreview Repository</name>
+        <url>http://maven.repository.redhat.com/techpreview/all</url>
+        <snapshots>
+            <enabled>false</enabled>
+		</snapshots>
+       	<releases>
+               <enabled>true</enabled>
+               <updatePolicy>never</updatePolicy>
+    	</releases>
+	</pluginRepository> 
+	<pluginRepository>
+	    <id>fuse-public-repository</id>
+        <name>FuseSource Community Release Repository</name>
+        <url>https://repo.fusesource.com/nexus/content/groups/public</url>
+        <snapshots>
+            <enabled>false</enabled>
+		</snapshots>
+       	<releases>
+               <enabled>true</enabled>
+               <updatePolicy>never</updatePolicy>
+    	</releases>
+	</pluginRepository>
     <pluginRepository>
       <id>release.fusesource.org</id>
       <name>FuseSource Release Repository</name>
@@ -95,41 +143,48 @@
     </pluginRepository>
   </pluginRepositories>
 
+  <scm>
+    <connection>scm:git:git://github.com/teiid/teiid.git</connection>
+    <developerConnection>scm:git:git@github.com:teiid/teiid.git</developerConnection>
+    <url>http://github.com/teiid/teiid</url>
+	<tag>HEAD</tag>
+  </scm>
+  
   <dependencies>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-core</artifactId>
-      <version>2.12.0.redhat-610379</version>
+      <version>2.15.1.redhat-620117</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-blueprint</artifactId>
-      <version>2.12.0.redhat-610379</version>
+      <version>2.15.1.redhat-620117</version>
     </dependency>
  <dependency>
 	  <groupId>org.apache.camel</groupId>
 	  <artifactId>camel-jackson</artifactId>
-	  <version>2.12.0.redhat-610379</version>
+	  <version>2.15.1.redhat-620117</version>
 	</dependency>
 	<dependency>
 	    <groupId>org.apache.camel</groupId>
 	    <artifactId>camel-jdbc</artifactId>
-	   	<version>2.12.0.redhat-610379</version>
+	   	<version>2.15.1.redhat-620117</version>
 	</dependency>
 	<dependency>
 		<groupId>org.jboss.teiid</groupId>
 		<artifactId>teiid-client</artifactId>
-        <version>8.4.1-redhat-7</version>
+        <version>8.7.1.redhat-8</version>
 	</dependency>
 	<dependency>
 		<groupId>org.jboss.teiid</groupId>
 		<artifactId>teiid-common-core</artifactId>
-        <version>8.4.1-redhat-7</version>
+        	<version>8.7.1.redhat-8</version>
 	</dependency>       
 	<dependency>
 		<groupId>org.jboss.teiid</groupId>
 		<artifactId>teiid</artifactId>
-		<version>8.4.1-redhat-7</version>
+		<version>8.7.1.redhat-8</version>
 		<classifier>jdbc</classifier>
 	</dependency>
 	<dependency>
@@ -165,7 +220,7 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-test-blueprint</artifactId>
-      <version>2.12.0.redhat-610379</version>
+      <version>2.15.1.redhat-620117</version>
       <scope>test</scope>
     </dependency>
 
@@ -213,7 +268,7 @@
       <plugin>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-maven-plugin</artifactId>
-        <version>2.12.0.redhat-610379</version>
+        <version>2.15.1.redhat-620117</version>
         <configuration>
           <useBlueprint>true</useBlueprint>
         </configuration>
@@ -221,7 +276,7 @@
       <plugin>
           <groupId>io.fabric8</groupId>
           <artifactId>fabric8-maven-plugin</artifactId>
-		  <version>1.0.0.redhat-379</version>
+		  <version>1.0.0.redhat-423</version>
       </plugin>
     </plugins>
   </build>

@@ -15,8 +15,8 @@
 		<property name="driverClassName" value="org.teiid.jdbc.TeiidDriver" />
 		<property name="url"
 			value="jdbc:teiid:CustomerContextVDB@mm://localhost:31000" />
-		<property name="username" value="user" />
-		<property name="password" value="user" />
+		<property name="username" value="teiidUser" />
+		<property name="password" value="redhat1!" />
 	</bean>
 
 

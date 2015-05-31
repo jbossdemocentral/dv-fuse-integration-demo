@@ -11,7 +11,7 @@
   <camelContext trace="false" id="usecase4-context" xmlns="http://camel.apache.org/schema/blueprint">
     <route id="mainRoute">
         <from uri="jetty:http://0.0.0.0:9000/usecase4"/>
-    	<to uri="http://localhost:8080/odata/CustomerContextVDB/CustomerContext?authMethod=Basic&amp;authUsername=user&amp;authPassword=user&amp;bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
+    	<to uri="http://localhost:8080/odata/CustomerContextVDB/CustomerContext?authMethod=Basic&amp;authUsername=teiidUser&amp;authPassword=redhat1!&amp;bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
     </route>
 </camelContext>
 
