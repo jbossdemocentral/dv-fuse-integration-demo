@@ -161,6 +161,16 @@
       <artifactId>camel-blueprint</artifactId>
       <version>2.15.1.redhat-620117</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.olingo</groupId>
+      <artifactId>olingo-odata2-api</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.component.olingo2</groupId>
+      <artifactId>camel-olingo2-api</artifactId>
+      <version>2.15.1.redhat-620117</version>
+    </dependency>
 	
     <!-- logging -->
     <dependency>
