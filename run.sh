@@ -6,7 +6,7 @@
 #
 # author: cojan.van.ballegooijen@redhat.com
 #
-FUSE_DIR=$PWD/target/fuse/jboss-fuse-6.2.0.redhat-117
+FUSE_DIR=$PWD/target/fuse/jboss-fuse-6.2.0.redhat-126
 DV_DIR=$PWD/target/dv/jboss-eap-6.3
 KARAF_LOG=$FUSE_DIR/data/log/fuse.log
 if [ -f "$KARAF_LOG" ]
@@ -22,6 +22,7 @@ sleep 30
 echo 
 echo "Starting JBoss Data Virtualization"
 echo
+rm $PWD/dv.log
 nohup $DV_DIR/bin/standalone.sh > dv.log 2>&1 </dev/null & 
 
 if [ ! -d "$FUSE_DIR/instances/c1" ]
@@ -44,6 +45,7 @@ then
 	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase2 1.0" -r 3 
 	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --feature camel-olingo2 usecase3" -r 3 
 	$FUSE_DIR/bin/client -u admin -p admin "fabric:container-create-child --profile usecase1 --profile usecase2 --profile usecase3 --profile usecase4 --profile jboss-fuse-minimal root c1" -r 3  
+       cp $PWD/support/fuse-support/sa.demo.fuse.jdv.usecase3.odata.cfg $FUSE_DIR/instances/c1/etc
 fi
 # Some wait code. Wait till the system is ready. 
 STARTUP_WAIT=60

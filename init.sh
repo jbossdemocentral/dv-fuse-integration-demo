@@ -4,7 +4,7 @@ AUTHORS="Kenny Peeples, Bill Kemp, Cojan van Ballegooijen"
 PROJECT="git@github.com:kpeeples/dv-fuse-integration-demo.git"
 PRODUCT="JBoss DV & Fuse Integration Demo"
 JBOSS_HOME_DV=./target/dv/jboss-eap-6.3
-JBOSS_HOME_FUSE=./target/fuse/jboss-fuse-6.2.0.redhat-117
+JBOSS_HOME_FUSE=./target/fuse/jboss-fuse-6.2.0.redhat-126
 SERVER_BIN_DV=$JBOSS_HOME_DV/bin
 SERVER_BIN_FUSE=$JBOSS_HOME_FUSE/bin
 SERVER_CONF_DV=$JBOSS_HOME_DV/standalone/configuration/
@@ -13,7 +13,7 @@ SRC_DIR=./software
 DV_SUPPORT_DIR=./support/dv-support
 FUSE_SUPPORT_DIR=./support/fuse-support
 PRJ_DIR=./projects
-FUSE=jboss-fuse-full-6.2.0.redhat-117.zip
+FUSE=jboss-fuse-full-6.2.0.redhat-126.zip
 DV=jboss-dv-installer-6.1.0.redhat-3.jar
 FUSE_VERSION=6.2.0
 DV_VERSION=6.1.0
@@ -108,7 +108,7 @@ fi
 
 echo "  - enabling demo accounts logins in users.properties file..."
 echo
-cp $FUSE_SUPPORT_DIR/* $SERVER_CONF_FUSE
+cp $FUSE_SUPPORT_DIR/users.properties $SERVER_CONF_FUSE
 
 # Final instructions to user to start and run demo.                                                                  
 echo
