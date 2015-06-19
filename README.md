@@ -35,9 +35,11 @@ Local Install Option:
     * cd ../usecase4  
     * mvn clean install -DskipTests   
     * mvn fabric8:deploy -DskipTests   
+    * cp use case 3 config file
     * cd ../..  
     * $FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase1 1.0" -r 3   
     * $FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase2 1.0" -r 3   
+    * $FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase3 1.0" -r 3 
     * $FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase4 1.0" -r 3  
     * $FUSE_DIR/bin/client -u admin -p admin "fabric:container-create-child --profile usecase1 --profile usecase2 --profile usecase4 --profile jboss-fuse-minimal root c1" -r 3   
   
