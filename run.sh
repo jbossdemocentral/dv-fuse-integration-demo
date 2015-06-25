@@ -6,7 +6,7 @@
 #
 # author: cojan.van.ballegooijen@redhat.com
 #
-FUSE_DIR=$PWD/target/fuse/jboss-fuse-6.2.0.redhat-129
+FUSE_DIR=$PWD/target/fuse/jboss-fuse-6.2.0.redhat-133
 DV_DIR=$PWD/target/dv/jboss-eap-6.3
 KARAF_LOG=$FUSE_DIR/data/log/fuse.log
 if [ -f "$KARAF_LOG" ]
@@ -27,7 +27,7 @@ nohup $DV_DIR/bin/standalone.sh > dv.log 2>&1 </dev/null &
 
 if [ ! -d "$FUSE_DIR/instances/c1" ]
 then
-	$FUSE_DIR/bin/client -u admin -p admin "fabric:create --resolver manualip --manual-ip 127.0.0.1 --wait-for-provisioning" -r 3
+	$FUSE_DIR/bin/client -u admin -p admin "fabric:create --resolver manualip --manual-ip 127.0.0.1 --wait-for-provisioning" -r 3 -d 10
 	cd projects/usecase1
 	mvn clean install -DskipTests 
 	mvn fabric8:deploy -DskipTests  
@@ -41,11 +41,11 @@ then
 	mvn clean install -DskipTests 
 	mvn fabric8:deploy -DskipTests  
 	cd ../..
-	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase1 1.0" -r 3 
-	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase2 1.0" -r 3 
-	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --feature camel-olingo2 usecase3" -r 3 
-	$FUSE_DIR/bin/client -u admin -p admin "fabric:container-create-child --profile usecase1 --profile usecase2 --profile usecase3 --profile usecase4 --profile jboss-fuse-minimal --resolver manualip root c1" -r 3  
-       cp $PWD/support/fuse-support/sa.demo.fuse.jdv.usecase3.odata.cfg $FUSE_DIR/instances/c1/etc
+	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase1 1.0" -r 3 -d 5
+	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --bundles wrap:file://$DV_DIR/dataVirtualization/jdbc/teiid-8.7.1.redhat-8-jdbc.jar usecase2 1.0" -r 3 -d 5
+	$FUSE_DIR/bin/client -u admin -p admin "profile-edit --feature camel-olingo2 usecase3" -r 3 -d 5
+	$FUSE_DIR/bin/client -u admin -p admin "fabric:container-create-child --profile usecase1 --profile usecase2 --profile usecase3 --profile usecase4 --profile jboss-fuse-minimal --resolver manualip root c1" -r 3 -d 5  
+	cp $PWD/support/fuse-support/sa.demo.fuse.jdv.usecase3.odata.cfg $FUSE_DIR/instances/c1/etc
 fi
 # Some wait code. Wait till the system is ready. 
 STARTUP_WAIT=60

@@ -72,7 +72,7 @@
       <to uri="odata://read/CustomerContextView.CustomerContext?$format=json" />
       <split streaming="true">
       	<simple>${body.getEntries()}</simple>
-      	<log message="OData Customer === ${body}" />
+      	<log message="OData Customer === ${body.getProperties()}" />
       </split>
     </route>
   </camelContext>
